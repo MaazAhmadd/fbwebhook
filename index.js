@@ -39,11 +39,14 @@ app.get("/", function (_req, res) {
   res.send("Hello World");
 });
 
+// Your verify token. Should be a random string.
+const VERIFY_TOKEN = "mySecureTokenKey";
+// The page access token we have generated in your app settings
+const PAGE_ACCESS_TOKEN =
+  "EAAIx0wSrrisBAIi1jTikccPmEwzMAHUkQQLPZAcrlZCAsxZAj6cgjqXkEmyrJYwRffBy1Tvf8ue1g1NpKmq4Ot0uNWyxLHemrOp7CWuzUPh9viO6Xe9UBuZCdYj2Yg3ZAbqxxOb9kRnJEq8J806PhFYZCm892xpl7nrE6W5bsZC5RaFUm9GVtpI";
+
 // Adds support for GET requests to our webhook
 app.get("/webhook", (req, res) => {
-  // Your verify token. Should be a random string.
-  const VERIFY_TOKEN = "mySecureTokenKey";
-
   // Parse the query params
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
@@ -162,10 +165,6 @@ function handlePostback(senderPsid, receivedPostback) {
 
 // Sends response messages via the Send API
 function callSendAPI(senderPsid, response) {
-  // The page access token we have generated in your app settings
-  const PAGE_ACCESS_TOKEN =
-    "EAAIx0wSrrisBAIQBboyFLZBWg3TZBioQlXg2zoDrts7f1q7c2Pa2USN4nbrXzqe3clHwr5XcKQRLZCTxg8VwQsoG9PAGJ8VMdtdhQskzngtrLsNp1HLpNaFhZA8NlS7BEayLjpUg0JsbH6ZArtZBdReTI4hxIncGxswcXZC3NtKumWTx7jTV7CE";
-
   // Construct the message body
   let requestBody = {
     recipient: {
