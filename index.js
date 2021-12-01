@@ -191,10 +191,10 @@ function callSendAPI(senderPsid, response) {
     }
   );
 }
-
+let port = process.env.PORT || 3000;
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log("Your app is listening on port " + listener.address().port);
+var listener = app.listen(port, function () {
+  console.log("Your app is listening on port " + port);
 });
 // curl -X GET "localhost:3000/webhook?hub.verify_token=mySecureTokenKey&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
 
