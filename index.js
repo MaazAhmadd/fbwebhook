@@ -40,10 +40,9 @@ app.get("/", function (_req, res) {
 });
 
 // Your verify token. Should be a random string.
-const VERIFY_TOKEN = "mySecureTokenKey";
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 // The page access token we have generated in your app settings
-const PAGE_ACCESS_TOKEN =
-  "EAAIx0wSrrisBAIi1jTikccPmEwzMAHUkQQLPZAcrlZCAsxZAj6cgjqXkEmyrJYwRffBy1Tvf8ue1g1NpKmq4Ot0uNWyxLHemrOp7CWuzUPh9viO6Xe9UBuZCdYj2Yg3ZAbqxxOb9kRnJEq8J806PhFYZCm892xpl7nrE6W5bsZC5RaFUm9GVtpI";
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 // Adds support for GET requests to our webhook
 app.get("/webhook", (req, res) => {
@@ -203,4 +202,4 @@ var listener = app.listen(port, function () {
 
 // curl -H "Content-Type: application/json" -X POST "localhost:3000/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
 
-// my access token: EAAIx0wSrrisBAIQBboyFLZBWg3TZBioQlXg2zoDrts7f1q7c2Pa2USN4nbrXzqe3clHwr5XcKQRLZCTxg8VwQsoG9PAGJ8VMdtdhQskzngtrLsNp1HLpNaFhZA8NlS7BEayLjpUg0JsbH6ZArtZBdReTI4hxIncGxswcXZC3NtKumWTx7jTV7CE
+// my access token:
