@@ -41,6 +41,7 @@ app.get("/", function (_req, res) {
 
 // Adds support for GET requests to our webhook
 app.get("/webhook", (req, res) => {
+  console.log("/webhook get");
   // Your verify token. Should be a random string.
   const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
@@ -65,6 +66,8 @@ app.get("/webhook", (req, res) => {
 
 // Creates the endpoint for your webhook
 app.post("/webhook", (req, res) => {
+  console.log("/webhook post");
+
   let body = req.body;
 
   // Checks if this is an event from a page subscription
@@ -98,6 +101,7 @@ app.post("/webhook", (req, res) => {
 
 // Handles messages events
 function handleMessage(senderPsid, receivedMessage) {
+  console.log("handle message");
   let response;
 
   // Checks if the message contains text
@@ -145,6 +149,8 @@ function handleMessage(senderPsid, receivedMessage) {
 
 // Handles messaging_postbacks events
 function handlePostback(senderPsid, receivedPostback) {
+  console.log("handle postback");
+
   let response;
 
   // Get the payload for the postback
