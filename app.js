@@ -39,13 +39,11 @@ app.get("/", function (_req, res) {
   res.send("Hello World");
 });
 
-// Your verify token. Should be a random string.
-const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
-// The page access token we have generated in your app settings
-const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
-
 // Adds support for GET requests to our webhook
 app.get("/webhook", (req, res) => {
+  // Your verify token. Should be a random string.
+  const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+
   // Parse the query params
   let mode = req.query["hub.mode"];
   let token = req.query["hub.verify_token"];
@@ -164,6 +162,9 @@ function handlePostback(senderPsid, receivedPostback) {
 
 // Sends response messages via the Send API
 function callSendAPI(senderPsid, response) {
+  // The page access token we have generated in your app settings
+  const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
   // Construct the message body
   let requestBody = {
     recipient: {
@@ -189,17 +190,8 @@ function callSendAPI(senderPsid, response) {
     }
   );
 }
-let port = process.env.PORT || 3000;
+
 // listen for requests :)
-var listener = app.listen(port, function () {
-  console.log("Your app is listening on port " + port);
+var listener = app.listen(process.env.PORT, function () {
+  console.log("Your app is listening on port " + listener.address().port);
 });
-// curl -X GET "localhost:3000/webhook?hub.verify_token=mySecureTokenKey&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe"
-
-// http://34.125.116.244/webhook?hub.verify_token=mySecureTokenKey&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe
-
-// http://codingninja.site/webhook?hub.verify_token=mySecureTokenKey&hub.challenge=CHALLENGE_ACCEPTED&hub.mode=subscribe
-
-// curl -H "Content-Type: application/json" -X POST "localhost:3000/webhook" -d '{"object": "page", "entry": [{"messaging": [{"message": "TEST_MESSAGE"}]}]}'
-
-// my access token:
